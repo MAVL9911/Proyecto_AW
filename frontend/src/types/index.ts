@@ -27,6 +27,8 @@ export interface Cart {
 
 export interface User {
   id: number;
+  nombre: string;
+  apellido: string;
   email: string;
   role: 'user' | 'admin';
 }

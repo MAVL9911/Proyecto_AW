@@ -4,24 +4,37 @@ import api from '../services/api';
 
 const Register = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirm, setConfirm] = useState('');
+  const [form, setForm] = useState({
+    nombre: '',
+    apellido: '',
+    email: '',
+    password: '',
+    confirm: ''
+  });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (password !== confirm) {
+    if (form.password !== form.confirm) {
       setError('Las contraseñas no coinciden');
       return;
     }
 
     setLoading(true);
     try {
-      await api.post('/auth/register', { email, password });
+      await api.post('/auth/register', {
+        nombre: form.nombre,
+        apellido: form.apellido,
+        email: form.email,
+        password: form.password
+      });
       navigate('/login');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Error al registrarse');
@@ -46,14 +59,41 @@ const Register = () => {
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* Nombre y Apellido */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+              <input
+                type="text"
+                name="nombre"
+                value={form.nombre}
+                onChange={handleChange}
+                placeholder="Juan"
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+              <input
+                type="text"
+                name="apellido"
+                value={form.apellido}
+                onChange={handleChange}
+                placeholder="García"
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Correo electrónico
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
             <input
               type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              name="email"
+              value={form.email}
+              onChange={handleChange}
               placeholder="tu@email.com"
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -61,13 +101,12 @@ const Register = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contraseña
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
             <input
               type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              name="password"
+              value={form.password}
+              onChange={handleChange}
               placeholder="Mínimo 8 caracteres, mayúscula y número"
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -75,13 +114,12 @@ const Register = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirmar contraseña
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Confirmar contraseña</label>
             <input
               type="password"
-              value={confirm}
-              onChange={e => setConfirm(e.target.value)}
+              name="confirm"
+              value={form.confirm}
+              onChange={handleChange}
               placeholder="••••••••"
               required
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
