@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware';
 import pool from '../config/db';
 
-// GET /api/cards
 export const getCards = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const [rows] = await pool.execute(
@@ -15,7 +14,6 @@ export const getCards = async (req: AuthRequest, res: Response): Promise<void> =
   }
 };
 
-// POST /api/cards
 export const addCard = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { nombreTitular, numero, expiracion, cvv } = req.body;
@@ -54,7 +52,6 @@ export const addCard = async (req: AuthRequest, res: Response): Promise<void> =>
   }
 };
 
-// DELETE /api/cards/:id
 export const deleteCard = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     await pool.execute(

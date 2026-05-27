@@ -10,7 +10,6 @@ import { verifyToken } from '../middlewares/auth.middleware';
 
 const router = Router();
 
-// Todas las rutas del carrito son públicas (visitantes también pueden usar el carrito)
 router.get('/', getCartItems);
 router.post('/', addToCart);
 router.put('/:productId', updateCartItem);

@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware';
 import pool from '../config/db';
 
-// GET /api/addresses
+
 export const getAddresses = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const [rows] = await pool.execute(
@@ -15,7 +15,6 @@ export const getAddresses = async (req: AuthRequest, res: Response): Promise<voi
   }
 };
 
-// POST /api/addresses
 export const addAddress = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { calle, ciudad, estado, codigoPostal, esPrincipal } = req.body;
@@ -50,7 +49,6 @@ export const addAddress = async (req: AuthRequest, res: Response): Promise<void>
   }
 };
 
-// PUT /api/addresses/:id
 export const updateAddress = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { calle, ciudad, estado, codigoPostal, esPrincipal } = req.body;
@@ -73,7 +71,6 @@ export const updateAddress = async (req: AuthRequest, res: Response): Promise<vo
   }
 };
 
-// DELETE /api/addresses/:id
 export const deleteAddress = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     await pool.execute(

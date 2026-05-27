@@ -1,7 +1,6 @@
 import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware';
 
-// Carrito en memoria (el carrito no se persiste en BD)
 interface CartItem {
   id: number;
   productId: number;

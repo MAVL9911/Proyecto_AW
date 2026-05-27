@@ -2,7 +2,6 @@ import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware';
 import pool from '../config/db';
 
-// GET /api/orders
 export const getOrders = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const [orders] = await pool.execute(
@@ -30,7 +29,6 @@ export const getOrders = async (req: AuthRequest, res: Response): Promise<void> 
   }
 };
 
-// GET /api/orders/all (admin)
 export const getAllOrders = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const [orders] = await pool.execute(
@@ -51,7 +49,6 @@ export const getAllOrders = async (req: AuthRequest, res: Response): Promise<voi
   }
 };
 
-// POST /api/orders
 export const createOrder = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     if (!req.user) {
@@ -84,7 +81,6 @@ export const createOrder = async (req: AuthRequest, res: Response): Promise<void
         [orderId, item.productId, item.name, item.price, item.quantity]
       );
 
-      // Descontar stock
       await pool.execute(
         'UPDATE productos SET stock = stock - ? WHERE id = ?',
         [item.quantity, item.productId]
@@ -97,7 +93,6 @@ export const createOrder = async (req: AuthRequest, res: Response): Promise<void
   }
 };
 
-// PUT /api/orders/:id/status (admin)
 export const updateOrderStatus = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const { status } = req.body;

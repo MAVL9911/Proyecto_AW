@@ -63,7 +63,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     const user = rows[0];
 
-    // Verificar bloqueo temporal
     if (user.blocked_until && new Date() < new Date(user.blocked_until)) {
       const minutesLeft = Math.ceil((new Date(user.blocked_until).getTime() - Date.now()) / 60000);
       res.status(403).json({ message: `Cuenta bloqueada temporalmente. Intenta en ${minutesLeft} minuto(s)` });

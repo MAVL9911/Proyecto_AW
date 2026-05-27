@@ -13,11 +13,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middlewares
+
 app.use(cors());
 app.use(express.json());
 
-// Rutas
+
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
@@ -25,7 +25,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/api/cards', cardRoutes);
 
-// Ruta de prueba
+
 app.get('/', (req, res) => {
   res.json({ message: '¡Servidor funcionando correctamente!' });
 });

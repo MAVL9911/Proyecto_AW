@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import pool from '../config/db';
 import { AuthRequest } from '../middlewares/auth.middleware';
 
-// GET /api/products
 export const getProducts = async (req: Request, res: Response): Promise<void> => {
   try {
     const { search, category, sort } = req.query;
@@ -31,7 +30,6 @@ export const getProducts = async (req: Request, res: Response): Promise<void> =>
   }
 };
 
-// GET /api/products/categories
 export const getCategories = async (req: Request, res: Response): Promise<void> => {
   try {
     const [rows] = await pool.execute(
@@ -44,7 +42,6 @@ export const getCategories = async (req: Request, res: Response): Promise<void> 
   }
 };
 
-// GET /api/products/:id
 export const getProductById = async (req: Request, res: Response): Promise<void> => {
   try {
     const [rows] = await pool.execute(
@@ -63,7 +60,6 @@ export const getProductById = async (req: Request, res: Response): Promise<void>
   }
 };
 
-// POST /api/products
 export const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, price, category, stock, image } = req.body;
@@ -84,7 +80,6 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
   }
 };
 
-// PUT /api/products/:id
 export const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, price, category, stock, image } = req.body;
@@ -100,7 +95,6 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
   }
 };
 
-// DELETE /api/products/:id
 export const discontinueProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     await pool.execute(
