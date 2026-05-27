@@ -43,7 +43,12 @@ const Navbar = () => {
         {/* Auth */}
         {isAuthenticated ? (
           <div className="flex items-center gap-3">
-            <span className="text-gray-400 text-sm">Hola, {user?.nombre}</span>
+            <button
+                onClick={() => navigate('/profile')}
+                className="text-gray-400 text-sm hover:text-white transition"
+                >
+                Hola, {user?.nombre}
+            </button>
             <button
               onClick={handleLogout}
               className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm transition"

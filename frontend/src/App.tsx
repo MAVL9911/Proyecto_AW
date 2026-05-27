@@ -9,6 +9,9 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Checkout from './pages/Checkout';
+import Profile from './pages/Profile';
+import Addresses from './pages/Addresses';
+import Cards from './pages/Cards';
 import Dashboard from './pages/Admin/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -33,6 +36,21 @@ const AppRoutes = () => {
       <Route path="/checkout" element={
         <ProtectedRoute>
           <Checkout />
+        </ProtectedRoute>
+      } />
+      <Route path="/profile" element={
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
+      } />
+      <Route path="/addresses" element={
+        <ProtectedRoute>
+          <Addresses />
+        </ProtectedRoute>
+      } />
+      <Route path="/cards" element={
+        <ProtectedRoute>
+          <Cards />
         </ProtectedRoute>
       } />
 

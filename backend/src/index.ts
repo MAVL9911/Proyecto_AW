@@ -5,6 +5,8 @@ import authRoutes from './routes/auth.routes';
 import productRoutes from './routes/product.routes';
 import cartRoutes from './routes/cart.routes';
 import orderRoutes from './routes/order.routes';
+import addressRoutes from './routes/address.routes';
+import cardRoutes from './routes/card.routes';
 
 dotenv.config();
 
@@ -20,6 +22,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/addresses', addressRoutes);
+app.use('/api/cards', cardRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
