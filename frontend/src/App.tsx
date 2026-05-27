@@ -14,6 +14,7 @@ import Addresses from './pages/Addresses';
 import Cards from './pages/Cards';
 import Dashboard from './pages/Admin/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import Orders from './pages/Orders';
 
 const AppRoutes = () => {
   const { fetchCart } = useCart();
@@ -51,6 +52,11 @@ const AppRoutes = () => {
       <Route path="/cards" element={
         <ProtectedRoute>
           <Cards />
+        </ProtectedRoute>
+      } />
+      <Route path="/orders" element={
+        <ProtectedRoute>
+          <Orders />
         </ProtectedRoute>
       } />
 

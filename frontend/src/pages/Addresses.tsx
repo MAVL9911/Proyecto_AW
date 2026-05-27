@@ -91,8 +91,8 @@ const Addresses = () => {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">Mis Direcciones</h1>
-            <button onClick={() => navigate('/profile')} className="text-blue-500 hover:underline text-sm mt-1">
-              ← Volver al perfil
+            <button onClick={() => navigate(-1)} className="text-blue-500 hover:underline text-sm mt-1">
+              ← Volver
             </button>
           </div>
           <button
@@ -109,7 +109,6 @@ const Addresses = () => {
           </div>
         )}
 
-        {/* Formulario */}
         {showForm && (
           <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
             <h2 className="text-lg font-semibold mb-4">{editingId ? 'Editar Dirección' : 'Nueva Dirección'}</h2>
@@ -184,7 +183,6 @@ const Addresses = () => {
           </div>
         )}
 
-        {/* Lista de direcciones */}
         {addresses.length === 0 ? (
           <div className="text-center py-20 text-gray-500">
             <p className="text-5xl mb-4">📍</p>
