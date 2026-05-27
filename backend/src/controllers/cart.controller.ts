@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { AuthRequest } from '../middlewares/auth.middleware';
 
-// Carrito temporal en memoria (hasta conectar MySQL)
+// Carrito en memoria (el carrito no se persiste en BD)
 interface CartItem {
   id: number;
   productId: number;
@@ -12,7 +12,7 @@ interface CartItem {
 }
 
 const carts: { [userId: number]: CartItem[] } = {};
-const guestCart: CartItem[] = []; // Carrito para visitantes
+const guestCart: CartItem[] = [];
 
 const getCart = (userId?: number): CartItem[] => {
   if (!userId) return guestCart;
@@ -20,12 +20,11 @@ const getCart = (userId?: number): CartItem[] => {
   return carts[userId];
 };
 
-// GET /api/cart - Obtener carrito
 export const getCartItems = (req: AuthRequest, res: Response): void => {
   const cart = getCart(req.user?.id);
-  
+
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const tax = subtotal * 0.16; // IVA 16%
+  const tax = subtotal * 0.16;
   const total = subtotal + tax;
 
   res.status(200).json({
@@ -36,7 +35,6 @@ export const getCartItems = (req: AuthRequest, res: Response): void => {
   });
 };
 
-// POST /api/cart - Agregar producto al carrito (RF08)
 export const addToCart = (req: AuthRequest, res: Response): void => {
   const { productId, name, price, quantity, image } = req.body;
 
@@ -51,20 +49,12 @@ export const addToCart = (req: AuthRequest, res: Response): void => {
   if (existingItem) {
     existingItem.quantity += quantity;
   } else {
-    cart.push({
-      id: Date.now(),
-      productId,
-      name,
-      price,
-      quantity,
-      image: image || ''
-    });
+    cart.push({ id: Date.now(), productId, name, price, quantity, image: image || '' });
   }
 
   res.status(200).json({ message: 'Producto agregado al carrito', cart });
 };
 
-// PUT /api/cart/:productId - Modificar cantidad (RF08)
 export const updateCartItem = (req: AuthRequest, res: Response): void => {
   const { quantity } = req.body;
   const productId = parseInt(req.params.productId as string);
@@ -86,7 +76,6 @@ export const updateCartItem = (req: AuthRequest, res: Response): void => {
   res.status(200).json({ message: 'Cantidad actualizada', cart });
 };
 
-// DELETE /api/cart/:productId - Eliminar producto del carrito (RF08)
 export const removeFromCart = (req: AuthRequest, res: Response): void => {
   const productId = parseInt(req.params.productId as string);
   const cart = getCart(req.user?.id);
@@ -101,7 +90,6 @@ export const removeFromCart = (req: AuthRequest, res: Response): void => {
   res.status(200).json({ message: 'Producto eliminado del carrito', cart });
 };
 
-// DELETE /api/cart - Vaciar carrito
 export const clearCart = (req: AuthRequest, res: Response): void => {
   const userId = req.user?.id;
   if (userId) {
