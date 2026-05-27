@@ -180,7 +180,7 @@ const Cards = () => {
         ) : (
           <div className="flex flex-col gap-4">
             {cards.map(card => (
-              <div key={card.id} className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-6 text-white flex justify-between items-center">
+              <div key={card.id} className="bg-linear-to-r from-blue-600 to-blue-800 rounded-xl p-6 text-white flex justify-between items-center">
                 <div>
                   <p className="text-xl font-mono tracking-widest mb-2">{card.numeroEnmascarado}</p>
                   <p className="font-medium">{card.nombreTitular}</p>

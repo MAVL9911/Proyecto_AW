@@ -65,7 +65,7 @@ const ProductDetail = () => {
 
         <div className="bg-white rounded-xl shadow-md p-8 flex flex-col md:flex-row gap-10">
           {/* Imagen */}
-          <div className="bg-gray-100 rounded-xl h-72 w-full md:w-96 flex items-center justify-center flex-shrink-0">
+          <div className="bg-gray-100 rounded-xl h-72 w-full md:w-96 flex items-center justify-center shrink-0">
             {product.image ? (
               <img src={product.image} alt={product.name} className="h-full w-full object-cover rounded-xl" />
             ) : (

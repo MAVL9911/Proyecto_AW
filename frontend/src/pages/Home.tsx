@@ -33,7 +33,7 @@ const Home = () => {
       <Navbar />
 
       {/* Hero */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20 px-6 text-center">
+      <div className="bg-linear-to-r from-blue-600 to-blue-800 text-white py-20 px-6 text-center">
         <h1 className="text-5xl font-bold mb-4">Bienvenido a ShopAW</h1>
         <p className="text-xl text-blue-100 mb-8">Los mejores productos al mejor precio</p>
         <Link

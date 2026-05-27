@@ -45,7 +45,7 @@ const Cart = () => {
               {cart.items.map(item => (
                 <div key={item.id} className="bg-white rounded-xl shadow-sm p-4 flex items-center gap-4">
                   {/* Imagen */}
-                  <div className="bg-gray-100 rounded-lg h-20 w-20 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-gray-100 rounded-lg h-20 w-20 flex items-center justify-center shrink-0">
                     {item.image ? (
                       <img src={item.image} alt={item.name} className="h-full w-full object-cover rounded-lg" />
                     ) : (
